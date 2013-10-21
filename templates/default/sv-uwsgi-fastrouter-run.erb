@@ -1,0 +1,4 @@
+#!/bin/sh
+
+exec 2>&1
+exec /usr/local/bin/sigintwrap <%= @options['uwsgi_bin'] %> --master --fastrouter-timeout <%= @options['fastrouter_timeout'] %> <% if @options['stats_server'] %>--fastrouter-stats-server <%= @options['stats_server'] %><% end %> --die-on-term <%= @options['chmodsocket'] %>--fastrouter <%= @options['router_socket'] %> --fastrouter-subscription-server <%= @options['subscription_socket'] %>

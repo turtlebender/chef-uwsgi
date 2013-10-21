@@ -1,0 +1,14 @@
+# uWSGI - manage uWSGI application server
+
+description "uWSGI FastRouter service"
+start on runlevel [2345]
+stop on runlevel [06]
+
+respawn
+
+pre-start script
+mkdir -p /var/run/uwsgi
+chown -R uwsgi:uwsgi /var/run/uwsgi
+end script
+
+exec <%= @uwsgi_bin %> --master --die-on-term --fastrouter-timeout <%= @fastrouter_timeout %> --chmod-socket 666 --fastrouter <%= @router_socket %> --fastrouter-subscription-server <%= @subscription_socket %> >> <%= @log_dir %>/fastrouter.log 2>&1

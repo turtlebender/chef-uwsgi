@@ -1,0 +1,5 @@
+#!/bin/bash
+
+exec 2>&1
+
+exec /usr/local/bin/sigintwrap <%= @options['uwsgi_bin'] %> --master --die-on-term --emperor <%= @options['vassal_dir'] %> <% if @options['stats_server'] %>--emperor-stats-server  <%= @options['stats_server'] %> <% end %>--emperor-broodlord <%= @options['broodlord_count'] %>
